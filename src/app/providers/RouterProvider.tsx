@@ -1,5 +1,6 @@
 import { loginPageRoute } from '@/pages/login'
 import { page404Route } from '@/pages/page-404'
+import { registerPageRoute } from '@/pages/register'
 import { compose, withSuspense } from '@/shared/lib/react'
 import { pathKeys } from '@/shared/lib/react-router'
 import { createElement, lazy } from 'react'
@@ -33,7 +34,7 @@ const browserRouter = createBrowserRouter([
     children: [
       {
         element: createElement(enhance(AuthLayout)),
-        children: [loginPageRoute]
+        children: [loginPageRoute,registerPageRoute]
       },
       {
         element: createElement(Outlet),

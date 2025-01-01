@@ -1,15 +1,17 @@
 "use client";
 
 import { SparklesCore } from "../sparkles";
+import { TextGenerateEffect } from "../text-generate-effect.tsx";
 
 export function SparklesPreview() {
   return (
     <div className="h-full w-full flex flex-col items-center justify-center overflow-hidden bg-background">
       <h1 className="md:text-5xl text-2xl lg:text-7xl font-bold text-center text-white relative z-20">
-        {"WhisperApp"}
+        {"Whisper"}
         {/**{"Where Your Secrets are Locked Tight"} */}
       </h1>
       <div className="w-[35rem] h-40 relative">
+        <TextGenerateEffect className="absolute top-0 justify-items-center w-full md:text-5xl text-2xl lg:text-7xl" words="Where Your Secrets are Locked Tight" />
         {/* Gradients */}
         <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-[2px] w-3/4 blur-sm" />
         <div className="absolute inset-x-20 top-0 bg-gradient-to-r from-transparent via-indigo-500 to-transparent h-px w-3/4" />

@@ -3,6 +3,7 @@ import { ErrorHandler, logError } from '@/shared/ui/error-handler'
 import { withErrorBoundary } from 'react-error-boundary'
 import { QueryClientProvider } from './QueryClientProvider'
 import { BrowserRouter } from './RouterProvider'
+import { ThemeProvider } from './ThemeProvider'
 
 
 const enhance = compose((component) =>
@@ -14,10 +15,12 @@ const enhance = compose((component) =>
 
 export const Provider = enhance(() => (
   <>
-    <GlobalSpinner />
+  <ThemeProvider defaultTheme='dark' storageKey='ui-theme'>
+  <GlobalSpinner />
     <QueryClientProvider>
       <BrowserRouter />
     </QueryClientProvider>
+  </ThemeProvider>
   </>
 ))
 
