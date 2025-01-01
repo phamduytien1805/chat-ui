@@ -20,8 +20,9 @@ export class AuthService {
       CreateUserDtoSchema,
       data.createUserDto,
     )
+
     return api
-      .post('/users', { user: createUserDto })
+      .post('/user/register', { ...createUserDto })
       .then(AxiosContracts.responseContract(UserDtoSchema))
   }
 

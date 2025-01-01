@@ -28,7 +28,7 @@ export type BaseInput = {
 const Input = React.forwardRef<
   HTMLInputElement,
   React.ComponentProps<'input'> & BaseInput
->(({ className, type, error, label, ...props }, ref) => {
+>(({ className, type, error, label,required, ...props }, ref) => {
   return (
     <div className="grid gap-2">
       <div className="flex flex-center align-center">
@@ -45,7 +45,7 @@ const Input = React.forwardRef<
               {error}
             </span>
           ) : (
-            props.required && (
+            required && (
               <span className="leading-none text-red-500"> *</span>
             )
           )}

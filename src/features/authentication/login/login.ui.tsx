@@ -78,6 +78,7 @@ export const LoginForm = enhance(() => {
           <Button
             variant={'link'}
             size={'sm'}
+            type='button'
             className="p-0 h-auto text-neutral-400"
           >
             Forgot your password?
@@ -86,7 +87,6 @@ export const LoginForm = enhance(() => {
         <Button
           type="submit"
           className="w-full"
-          disabled={!canSubmit}
         >
           Login
         </Button>

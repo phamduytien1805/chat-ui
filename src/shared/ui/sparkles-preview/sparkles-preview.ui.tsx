@@ -1,7 +1,6 @@
-"use client";
 
 import { SparklesCore } from "../sparkles";
-import { TextGenerateEffect } from "../text-generate-effect.tsx";
+import { TextGenerateEffect } from "../text-generate-effect";
 
 export function SparklesPreview() {
   return (

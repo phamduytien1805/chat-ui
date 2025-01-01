@@ -8,6 +8,9 @@ import { withErrorBoundary } from 'react-error-boundary'
 import { useNavigate } from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
+import { useRegisterMutation } from './register.mutation'
+import { pathKeys } from '@/shared/lib/react-router'
+import { RESP_CODE } from '@/shared/lib/enum'
 
 const enhance = compose((component) =>
   withErrorBoundary(component, {
@@ -30,20 +33,27 @@ export const RegisterForm = enhance(() => {
     defaultValues: { email: '', password: '', username: '' },
   })
 
-  // const { mutate, isPending } = useLoginMutation({
-  //   onSuccess: async (response) => {
-  //     const { username } = response.data.user
-  //     navigate(pathKeys.profile.byUsername({ username }))
-  //   },
+  const { mutate: registerUser, isPending } = useRegisterMutation({
+    onSuccess: async (response) => {
+      navigate(pathKeys.home())
+    },
 
-  //   onError(error) {
-  //     setError('root', { message: error.message })
-  //   },
-  // })
+    onError({response}) {
+     const error =response?.data as any
+     if(error.code as any ===RESP_CODE.ERROR_UNIQUE) {
+      const errorMsg = 'Email or Username is used'
+      setError('email', { message: errorMsg })
+      setError('username', { message:errorMsg })
+     }
+    },
+  })
 
-  const canSubmit = [isDirty, isValid].every(Boolean)
+  const canSubmit = [ !isPending].every(Boolean)
 
-  const onSubmit = (loginUserDto: authTypesDto.LoginUserDto) => {}
+
+  const onSubmit = (loginUserDto: authTypesDto.CreateUserDto) =>{
+    registerUser(loginUserDto)
+  }
 
   return (
     <form
@@ -57,6 +67,7 @@ export const RegisterForm = enhance(() => {
         placeholder="m@example.com"
         required
         error={errors.email?.message}
+        disabled={isPending}
         {...register('email')}
       />
       <Input
@@ -64,6 +75,7 @@ export const RegisterForm = enhance(() => {
         type="text"
         label="Username"
         required
+        disabled={isPending}
         error={errors.username?.message}
         {...register('username')}
       />
@@ -71,6 +83,7 @@ export const RegisterForm = enhance(() => {
         id="password"
         type="password"
         label="Password"
+        disabled={isPending}
         required
         error={errors.password?.message}
         {...register('password')}

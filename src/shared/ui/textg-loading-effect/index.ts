@@ -1,0 +1,1 @@
+export {TextLoadingEffect} from './text-loading.effect.ui'

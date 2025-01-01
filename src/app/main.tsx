@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { Provider } from './providers'
 import './index.css'
 import { api, handleGenericError } from '@/shared/api'
+import { useSession } from '@/shared/session'
 
 window.addEventListener('error', (event) => {
   if (axios.isAxiosError(event.error)) {
@@ -12,11 +13,10 @@ window.addEventListener('error', (event) => {
 
 api.interceptors.request.use(
   (config) => {
-    // const { session } = useSessionStore.getState()
-    // if (session) {
-    //   // eslint-disable-next-line no-param-reassign
-    //   config.headers.Authorization = `Bearer ${session.token}`
-    // }
+    const session = useSession().getSession()
+    if (session) {
+      config.headers.Authorization = `Bearer ${session.accessToken}`
+    }
     return config
   },
   (error) => Promise.reject(error),

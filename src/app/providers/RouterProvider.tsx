@@ -1,3 +1,5 @@
+import { verificationPageRoute } from '@/pages/account-verification'
+import { dashboardPageRoute } from '@/pages/dashboard'
 import { loginPageRoute } from '@/pages/login'
 import { page404Route } from '@/pages/page-404'
 import { registerPageRoute } from '@/pages/register'
@@ -28,6 +30,13 @@ const AuthLayout = lazy(() =>
 )
 
 
+const WorkspaceLayout = lazy(() =>
+  import('@/pages/layouts').then((module) => ({
+    default: module.WorkspaceLayout,
+  })),
+)
+
+
 const browserRouter = createBrowserRouter([
   {
     errorElement: <BubbleError />,
@@ -37,8 +46,12 @@ const browserRouter = createBrowserRouter([
         children: [loginPageRoute,registerPageRoute]
       },
       {
+        element: createElement(enhance(WorkspaceLayout)),
+        children: [dashboardPageRoute],
+      },
+      {
         element: createElement(Outlet),
-        children: [page404Route],
+        children: [page404Route,verificationPageRoute],
       },
       {
         loader: async () => redirect(pathKeys.page404()),

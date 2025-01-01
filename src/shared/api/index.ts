@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios'
 import { z } from 'zod'
 
 export const api = axios.create({
-  baseURL: 'https://api.realworld.io/api',
+  baseURL: import.meta.env.VITE_API_BASE_URL,
 })
 
 export function handleGenericError(error: AxiosError) {
