@@ -27,7 +27,7 @@ export const UpdateUserDtoSchema = z
 export const CreateUserDtoSchema = z.object({
   username: z
     .string()
-    .min(5, { message: 'This must be at least 5 characters long.' }),
+    .min(2, { message: 'This must be 2-32 characters.' }).max(32, {message: 'This must be 2-32 characters.'}),
   email: z.string().email({
     message:
     'This format is invalid',

@@ -78,7 +78,7 @@ export const LoginForm = enhance(() => {
           <Button
             variant={'link'}
             size={'sm'}
-            className="p-0 h-auto"
+            className="p-0 h-auto text-neutral-400"
           >
             Forgot your password?
           </Button>

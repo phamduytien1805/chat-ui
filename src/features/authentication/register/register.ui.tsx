@@ -1,13 +1,6 @@
 import { authContractsDto, authTypesDto } from '@/shared/api/auth'
 import { compose } from '@/shared/lib/react'
 import { Button } from '@/shared/ui/button'
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/shared/ui/card'
 import { ErrorHandler, logError } from '@/shared/ui/error-handler'
 import { Input } from '@/shared/ui/input'
 import { Label } from '@/shared/ui/label'
@@ -23,7 +16,7 @@ const enhance = compose((component) =>
   }),
 )
 
-export const LoginForm = enhance(() => {
+export const RegisterForm = enhance(() => {
   const navigate = useNavigate()
 
   const {
@@ -32,9 +25,9 @@ export const LoginForm = enhance(() => {
     setError,
     getValues,
     formState: { errors, isDirty, isValid },
-  } = useForm<authTypesDto.LoginUserDto>({
-    resolver: zodResolver(authContractsDto.LoginUserDtoSchema),
-    defaultValues: { email: '', password: '' },
+  } = useForm<authTypesDto.CreateUserDto>({
+    resolver: zodResolver(authContractsDto.CreateUserDtoSchema),
+    defaultValues: { email: '', password: '', username: '' },
   })
 
   // const { mutate, isPending } = useLoginMutation({
@@ -57,39 +50,38 @@ export const LoginForm = enhance(() => {
       className="mt-5 flex flex-col gap-6"
       onSubmit={handleSubmit(onSubmit)}
     >
-        <Input
-          id="email"
-          type="email"
-          label="Email"
-          placeholder="m@example.com"
-          required
-          error={errors.email?.message}
-          {...register('email')}
-        />
-        <div>
-          <Input
-            id="password"
-            type="password"
-            label="Password"
-            required
-            error={errors.password?.message}
-            {...register('password')}
-          />
-          <Button
-            variant={'link'}
-            size={'sm'}
-            className="p-0 h-auto"
-          >
-            Forgot your password?
-          </Button>
-        </div>
-        <Button
-          type="submit"
-          className="w-full"
-          disabled={!canSubmit}
-        >
-          Login
-        </Button>
+      <Input
+        id="email"
+        type="email"
+        label="Email"
+        placeholder="m@example.com"
+        required
+        error={errors.email?.message}
+        {...register('email')}
+      />
+      <Input
+        id="username"
+        type="text"
+        label="Username"
+        required
+        error={errors.username?.message}
+        {...register('username')}
+      />
+      <Input
+        id="password"
+        type="password"
+        label="Password"
+        required
+        error={errors.password?.message}
+        {...register('password')}
+      />
+      <Button
+        type="submit"
+        className="w-full"
+        disabled={!canSubmit}
+      >
+        Continue
+      </Button>
     </form>
   )
 })

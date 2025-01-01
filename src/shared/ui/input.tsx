@@ -39,11 +39,15 @@ const Input = React.forwardRef<
           })}
         >
           {label}
-          {error && (
-            <span className='text-xs italic'>
+          {error ? (
+            <span className="text-xs italic">
               {' - '}
               {error}
             </span>
+          ) : (
+            props.required && (
+              <span className="leading-none text-red-500"> *</span>
+            )
           )}
         </Label>
       </div>

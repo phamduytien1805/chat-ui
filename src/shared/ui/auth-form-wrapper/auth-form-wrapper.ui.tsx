@@ -32,10 +32,10 @@ export function AuthFormWrapper({
           Go back
         </Button>
       )}
-      <h2 className="font-bold text-xl text-neutral-800 dark:text-neutral-200">
+      <h2 className="text-center font-bold text-xl text-neutral-800 dark:text-neutral-200">
         {title}
       </h2>
-      <p className="text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
+      <p className="text-center text-neutral-600 text-sm max-w-sm mt-2 dark:text-neutral-300">
         {description}
       </p>
       {children}
