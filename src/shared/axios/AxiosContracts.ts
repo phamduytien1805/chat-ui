@@ -1,11 +1,16 @@
 import { AxiosHeaders, AxiosResponse } from 'axios'
-import { ZodType } from 'zod'
+import { z, ZodType } from 'zod'
 import { AxiosValidationError } from './AxiosValidationError'
+import { RESP_CODE } from '../lib/enum'
 
+type ResponseApi = {
+  code: RESP_CODE,
+  data: any,
+}
 export class AxiosContracts {
   static responseContract<Data>(schema: ZodType<Data>) {
-    return (response: AxiosResponse<unknown>): AxiosResponse<Data> => {
-      const validation = schema.safeParse(response.data)
+    return (response: AxiosResponse<ResponseApi>): AxiosResponse<Data> => {
+      const validation = schema.safeParse(response.data.data)
 
       if (validation.error) {
         throw new AxiosValidationError(

@@ -23,7 +23,7 @@ export class AuthService {
 
     return api
       .post('/user/register', { ...createUserDto })
-      .then(AxiosContracts.responseContract(UserDtoSchema))
+      .then(AxiosContracts.responseContract(UserDtoSchema.omit({ access_token: true, refresh_token: true })))
   }
 
   static loginUserMutation(data: { loginUserDto: LoginUserDto }) {
