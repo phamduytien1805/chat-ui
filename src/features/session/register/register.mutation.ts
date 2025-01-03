@@ -34,15 +34,9 @@ export function useRegisterMutation(
     onMutate,
 
     onSuccess: async (response, variables, context) => {
-      console.log('object :>> ', response)
       const user = response.data
       const { setSession } = useSession()
-      const session = sessionLib.transformUserDtoToSession({
-        ...user,
-        access_token: '',
-        refresh_token: '',
-      })
-      console.log('user :>> ', user, session)
+      const session = sessionLib.transformUserAuthenticatedDtoToSession(user)
       setSession(session)
 
       await onSuccess?.(response, variables, context)

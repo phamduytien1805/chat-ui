@@ -1,5 +1,5 @@
-import { LoginForm } from '@/features/authentication/login/login.ui'
-import { RegisterForm } from '@/features/authentication/register'
+import { LoginForm } from '@/features/session/login/login.ui'
+import { RegisterForm } from '@/features/session/register'
 import { pathKeys } from '@/shared/lib/react-router'
 import { AuthFormWrapper } from '@/shared/ui/auth-form-wrapper'
 import { Link, useNavigate } from 'react-router-dom'

@@ -1,4 +1,5 @@
-import { Button } from "../button"
+import axios, { HttpStatusCode } from 'axios'
+import { Button } from '../button'
 
 type ErrorHandlerProps = {
   error: Error
@@ -9,6 +10,12 @@ const isDevelopment = import.meta.env.DEV
 
 export function ErrorHandler(props: ErrorHandlerProps) {
   const { error, resetErrorBoundary } = props
+
+  if (axios.isAxiosError(error)) {
+    if (Number(error.code) === HttpStatusCode.Unauthorized) {
+      // Redirect to login page
+    }
+  }
 
   return (
     <div>

@@ -30,10 +30,10 @@ export const Provider = enhance(() => (
 ))
 
 function GlobalSpinner() {
-  const display = useAtomValue(globalLoadingState)
+  const numOfRequestDisplay = useAtomValue(globalLoadingState)
   return (
     <>
-      <GlobalLoading display={display} />
+      <GlobalLoading display={numOfRequestDisplay > 0} />
     </>
   )
 }

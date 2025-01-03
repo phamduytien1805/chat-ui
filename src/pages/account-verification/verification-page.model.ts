@@ -1,15 +1,13 @@
 import { pathKeys } from '@/shared/lib/react-router'
-import { useSession } from '@/shared/session'
+import { SessionLoader, useSession } from '@/shared/session'
 import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 
 
-export class VerificationLoader {
-  static async verificationPage(args: LoaderFunctionArgs) {
+export class VerificationLoader extends SessionLoader {
+  static async verificationPage(_args: LoaderFunctionArgs) {
+    const args = this.sessionLoader(_args)
     const session = useSession().getSession()
-    if(!session) {
-      return redirect(pathKeys.login())
-    }
-    if(session.emailVerified) {
+    if (session?.emailVerified) {
       return redirect(pathKeys.home())
     }
     return args

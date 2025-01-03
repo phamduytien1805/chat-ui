@@ -4,6 +4,7 @@ import {
   CreateUserDtoSchema,
   LoginUserDtoSchema,
   UpdateUserDtoSchema,
+  UserAuthenticatedDtoSchema,
   UserDtoSchema,
 } from './auth.contracts'
 import { CreateUserDto, LoginUserDto, UpdateUserDto } from './auth.types'
@@ -23,7 +24,7 @@ export class AuthService {
 
     return api
       .post('/user/register', { ...createUserDto })
-      .then(AxiosContracts.responseContract(UserDtoSchema.omit({ access_token: true, refresh_token: true })))
+      .then(AxiosContracts.responseContract(UserAuthenticatedDtoSchema))
   }
 
   static loginUserMutation(data: { loginUserDto: LoginUserDto }) {
@@ -32,8 +33,8 @@ export class AuthService {
       data.loginUserDto,
     )
     return api
-      .post('/users/login', { user: loginUserDto })
-      .then(AxiosContracts.responseContract(UserDtoSchema))
+      .post('/user/auth', {  ...loginUserDto })
+      .then(AxiosContracts.responseContract(UserAuthenticatedDtoSchema))
   }
 
   static logoutUserMutation() {

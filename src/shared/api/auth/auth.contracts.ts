@@ -8,9 +8,13 @@ export const UserDtoSchema = z.object({
   id: z.string(),
   email: z.string(),
   email_verified: z.boolean(),
+  username: z.string(),
+})
+
+export const UserAuthenticatedDtoSchema = z.object({
   access_token: z.string(),
   refresh_token: z.string(),
-  username: z.string(),
+  user: UserDtoSchema,
 })
 
 export const UpdateUserDtoSchema = z

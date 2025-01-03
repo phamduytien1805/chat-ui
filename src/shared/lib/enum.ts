@@ -3,4 +3,5 @@ export enum RESP_CODE {
     ERROR = -1,
     ERROR_VALIDATION = -2,
     ERROR_UNIQUE = -3,
+    ERROR_AUTHENTICATION = -4,
 }

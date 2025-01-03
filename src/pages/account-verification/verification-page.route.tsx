@@ -17,7 +17,7 @@ const VerificationPage = lazy(() =>
 )
 
 const enhance = compose((component) =>
-  withSuspense(component, { FallbackComponent: () => <GlobalLoading display={true} /> }),
+  withSuspense(component, { FallbackComponent: () => <></> }),
 )
 
 export const verificationPageRoute: RouteObject = {

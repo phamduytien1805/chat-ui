@@ -1,4 +1,4 @@
-import { LoginForm } from '@/features/authentication/login/login.ui'
+import { LoginForm } from '@/features/session/login/login.ui'
 import { pathKeys } from '@/shared/lib/react-router'
 import { AuthFormWrapper } from '@/shared/ui/auth-form-wrapper'
 import { Link } from 'react-router-dom'

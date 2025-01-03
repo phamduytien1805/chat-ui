@@ -1,9 +1,12 @@
 import { z } from 'zod'
 
-export const SessionSchema = z.object({
+export const UserInfoSchema = z.object({
   email: z.string(),
   emailVerified: z.boolean(),
-  accessToken: z.string(),
-  refreshToken: z.string(),
   username: z.string(),
 })
+export const UserSessionSchema = z.object({
+  accessToken: z.string(),
+  refreshToken: z.string(),
+})
+export const SessionSchema = z.object({}).merge(UserInfoSchema).merge(UserSessionSchema)

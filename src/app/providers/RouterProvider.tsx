@@ -5,8 +5,10 @@ import { page404Route } from '@/pages/page-404'
 import { registerPageRoute } from '@/pages/register'
 import { compose, withSuspense } from '@/shared/lib/react'
 import { pathKeys } from '@/shared/lib/react-router'
+import { useSession } from '@/shared/session'
 import { createElement, lazy } from 'react'
 import {
+  LoaderFunctionArgs,
   Outlet,
   RouterProvider,
   createBrowserRouter,
@@ -35,6 +37,11 @@ const WorkspaceLayout = lazy(() =>
     default: module.WorkspaceLayout,
   })),
 )
+
+const sessionLoader = (args: LoaderFunctionArgs) =>
+  import('@/shared/session/index').then((module) =>
+    module.SessionLoader.sessionLoader(args),
+  )
 
 
 const browserRouter = createBrowserRouter([
@@ -71,6 +78,6 @@ function BubbleError() {
 
 function LayoutSkeleton() {
   return (
-    <></>
+    <>hehehhe</>
   )
 }
