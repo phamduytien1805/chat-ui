@@ -6,7 +6,6 @@ import { LoaderFunctionArgs, redirect } from 'react-router-dom'
 import { pathKeys } from '../lib/react-router'
 import { queryClient } from '../lib/react-query'
 import { SessionQueries } from './session.queries'
-import { useGlobalLoading } from '../ui/global-loading/global-loading.model'
 
 export const sessionAtom = atomWithStorage<Nullable<Session>>(
   'session',
@@ -33,7 +32,7 @@ export class SessionLoader {
     if (!session) {
       return redirect(pathKeys.login())
     }
-
+    
     const userData = await queryClient
       .fetchQuery(SessionQueries.currentSessionQuery())
 

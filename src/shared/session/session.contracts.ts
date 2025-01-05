@@ -7,6 +7,5 @@ export const UserInfoSchema = z.object({
 })
 export const UserSessionSchema = z.object({
   accessToken: z.string(),
-  refreshToken: z.string(),
 })
 export const SessionSchema = z.object({}).merge(UserInfoSchema).merge(UserSessionSchema)

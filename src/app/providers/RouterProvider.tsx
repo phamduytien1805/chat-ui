@@ -1,7 +1,7 @@
 import { verificationPageRoute } from '@/pages/account-verification'
 import { dashboardPageRoute } from '@/pages/dashboard'
 import { loginPageRoute } from '@/pages/login'
-import { page404Route } from '@/pages/page-404'
+import { pageErrorRoute } from '@/pages/page-error'
 import { registerPageRoute } from '@/pages/register'
 import { compose, withSuspense } from '@/shared/lib/react'
 import { pathKeys } from '@/shared/lib/react-router'
@@ -38,12 +38,6 @@ const WorkspaceLayout = lazy(() =>
   })),
 )
 
-const sessionLoader = (args: LoaderFunctionArgs) =>
-  import('@/shared/session/index').then((module) =>
-    module.SessionLoader.sessionLoader(args),
-  )
-
-
 const browserRouter = createBrowserRouter([
   {
     errorElement: <BubbleError />,
@@ -58,10 +52,10 @@ const browserRouter = createBrowserRouter([
       },
       {
         element: createElement(Outlet),
-        children: [page404Route,verificationPageRoute],
+        children: [pageErrorRoute,verificationPageRoute],
       },
       {
-        loader: async () => redirect(pathKeys.page404()),
+        loader: async () => redirect(pathKeys.error.page404()),
         path: '*',
       },
     ],

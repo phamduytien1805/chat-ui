@@ -1,5 +1,7 @@
-import axios, { HttpStatusCode } from 'axios'
+import { HttpStatusCode, isAxiosError } from 'axios'
 import { Button } from '../button'
+import { Navigate } from 'react-router-dom'
+import { pathKeys } from '@/shared/lib/react-router'
 
 type ErrorHandlerProps = {
   error: Error
@@ -10,12 +12,10 @@ const isDevelopment = import.meta.env.DEV
 
 export function ErrorHandler(props: ErrorHandlerProps) {
   const { error, resetErrorBoundary } = props
-
-  if (axios.isAxiosError(error)) {
-    if (Number(error.code) === HttpStatusCode.Unauthorized) {
-      // Redirect to login page
-    }
-  }
+  // console.log('error :>> ', error);
+  // if(isAxiosError(error) && error.status === HttpStatusCode.Unauthorized) {
+  //   return <Navigate to={pathKeys.error.page401()} />
+  // }
 
   return (
     <div>

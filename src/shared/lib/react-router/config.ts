@@ -14,9 +14,17 @@ export const pathKeys = {
   accountVerification() {
     return pathKeys.root.concat('verification/')
   },
-  page404() {
-    return pathKeys.root.concat('404/')
-  },
+  error: {
+    root() {
+      return pathKeys.root.concat('error/')
+    },
+    page404() {
+      return pathKeys.error.root().concat('404/')
+    },
+    page401() {
+      return pathKeys.error.root().concat('401/')
+    }
+  }
   // article: {
   //   root() {
   //     return pathKeys.root.concat('article/')

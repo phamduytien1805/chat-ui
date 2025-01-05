@@ -10,9 +10,21 @@ import {
 import { CreateUserDto, LoginUserDto, UpdateUserDto } from './auth.types'
 
 export class AuthService {
+  private static prefixUser = '/user'
+  private static prefixAuth = '/auth'
   static currentUserQuery(config: { signal?: AbortSignal }) {
     return api
-      .get('/user', config)
+      .get(this.prefixUser, config)
+      .then(AxiosContracts.responseContract(UserDtoSchema))
+  }
+
+  static updateUserMutation(data: { updateUserDto: UpdateUserDto }) {
+    const updateUserDto = AxiosContracts.requestContract(
+      UpdateUserDtoSchema,
+      data.updateUserDto,
+    )
+    return api
+      .put(this.prefixUser, { user: updateUserDto })
       .then(AxiosContracts.responseContract(UserDtoSchema))
   }
 
@@ -23,7 +35,7 @@ export class AuthService {
     )
 
     return api
-      .post('/user/register', { ...createUserDto })
+      .post(`${this.prefixAuth}/register`, { ...createUserDto })
       .then(AxiosContracts.responseContract(UserAuthenticatedDtoSchema))
   }
 
@@ -33,21 +45,17 @@ export class AuthService {
       data.loginUserDto,
     )
     return api
-      .post('/user/auth', {  ...loginUserDto })
+      .post(`${this.prefixAuth}/login`, {  ...loginUserDto })
       .then(AxiosContracts.responseContract(UserAuthenticatedDtoSchema))
+  }
+
+  static requestTokenMutation() {
+    return api
+    .post(`${this.prefixAuth}/token`)
+    .then(AxiosContracts.responseContract(UserAuthenticatedDtoSchema))
   }
 
   static logoutUserMutation() {
     return Promise.resolve()
-  }
-
-  static updateUserMutation(data: { updateUserDto: UpdateUserDto }) {
-    const updateUserDto = AxiosContracts.requestContract(
-      UpdateUserDtoSchema,
-      data.updateUserDto,
-    )
-    return api
-      .put('/user', { user: updateUserDto })
-      .then(AxiosContracts.responseContract(UserDtoSchema))
   }
 }

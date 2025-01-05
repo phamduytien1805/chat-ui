@@ -3,19 +3,10 @@ import { z } from 'zod'
 
 export const api = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
+  // withCredentials: true,
 })
 
 export function handleGenericError(error: AxiosError) {
-  /**
-   * spec told that only 422 status code should return GenericError errors
-   * but sometimes responses with other statuses returns
-   * the same shape of error, this is a reason why we cant use this code
-   * and have to validate each response
-   * @see https://realworld-docs.netlify.app/docs/specs/frontend-specs/swagger
-   */
-  // if (error.response?.status !== 422) {
-  //   return Promise.reject(error)
-  // }
 
   const validation = GenericErrorSchema.safeParse(error.response?.data)
 

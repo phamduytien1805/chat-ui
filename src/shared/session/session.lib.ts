@@ -20,6 +20,5 @@ export function transformUserAuthenticatedDtoToSession(
     username: userDto.username,
     emailVerified: userDto.email_verified,
     accessToken: dto.access_token,
-    refreshToken: dto.refresh_token,
   }
 }

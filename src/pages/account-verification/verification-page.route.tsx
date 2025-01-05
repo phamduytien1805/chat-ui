@@ -3,7 +3,6 @@ import { LoaderFunctionArgs, RouteObject } from 'react-router-dom'
 
 import { compose, withSuspense } from '@/shared/lib/react'
 import { pathKeys } from '@/shared/lib/react-router'
-import { GlobalLoading } from '@/shared/ui/global-loading'
 
 const verificationPageLoader = (args: LoaderFunctionArgs) =>
   import('./verification-page.model').then((module) =>

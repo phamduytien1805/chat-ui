@@ -1,9 +1,10 @@
-import axios from 'axios'
+import axios, { HttpStatusCode } from 'axios'
 import ReactDOM from 'react-dom/client'
 import { Provider } from './providers'
 import './index.css'
 import { api, handleGenericError } from '@/shared/api'
 import { useSession } from '@/shared/session'
+import { TokenServiceInstance } from '@/shared/api/token/token.service'
 
 window.addEventListener('error', (event) => {
   if (axios.isAxiosError(event.error)) {
@@ -28,7 +29,10 @@ api.interceptors.response.use(
     if (!axios.isAxiosError(error)) {
       return Promise.reject(error)
     }
-
+    if(error.response?.status === HttpStatusCode.Unauthorized && error.config) {
+      return TokenServiceInstance.retry(error.config)
+    }
+    
     return Promise.reject(handleGenericError(error))
   },
 )

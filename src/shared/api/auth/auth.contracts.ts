@@ -13,7 +13,6 @@ export const UserDtoSchema = z.object({
 
 export const UserAuthenticatedDtoSchema = z.object({
   access_token: z.string(),
-  refresh_token: z.string(),
   user: UserDtoSchema,
 })
 
