@@ -4,8 +4,7 @@ import { withErrorBoundary } from 'react-error-boundary'
 import { QueryClientProvider } from './QueryClientProvider'
 import { BrowserRouter } from './RouterProvider'
 import { ThemeProvider } from './ThemeProvider'
-import { TextLoadingEffect } from '@/shared/ui/textg-loading-effect'
-import { useAtom, useAtomValue } from 'jotai'
+import { useAtomValue } from 'jotai'
 import { GlobalLoading, globalLoadingState } from '@/shared/ui/global-loading'
 
 const enhance = compose((component) =>

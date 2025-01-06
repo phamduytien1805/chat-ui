@@ -4,4 +4,5 @@ export enum RESP_CODE {
     ERROR_VALIDATION = -2,
     ERROR_UNIQUE = -3,
     ERROR_AUTHENTICATION = -4,
+    ERROR_TOKEN_EXPIRED = -5,
 }

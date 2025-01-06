@@ -38,7 +38,7 @@ const WorkspaceLayout = lazy(() =>
   })),
 )
 
-const browserRouter = createBrowserRouter([
+export const browserRouter = createBrowserRouter([
   {
     errorElement: <BubbleError />,
     children: [
@@ -72,6 +72,6 @@ function BubbleError() {
 
 function LayoutSkeleton() {
   return (
-    <>hehehhe</>
+    <></>
   )
 }

@@ -12,10 +12,6 @@ const isDevelopment = import.meta.env.DEV
 
 export function ErrorHandler(props: ErrorHandlerProps) {
   const { error, resetErrorBoundary } = props
-  // console.log('error :>> ', error);
-  // if(isAxiosError(error) && error.status === HttpStatusCode.Unauthorized) {
-  //   return <Navigate to={pathKeys.error.page401()} />
-  // }
 
   return (
     <div>

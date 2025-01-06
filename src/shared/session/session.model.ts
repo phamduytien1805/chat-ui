@@ -22,6 +22,7 @@ export const useSession = () => {
         | Nullable<Session>
         | ((prev: Nullable<Session>) => Nullable<Session>),
     ) => store.set(sessionAtom, updater),
+    reset: () => store.set(sessionAtom, null),
   }
 }
 
@@ -32,9 +33,10 @@ export class SessionLoader {
     if (!session) {
       return redirect(pathKeys.login())
     }
-    
-    const userData = await queryClient
-      .fetchQuery(SessionQueries.currentSessionQuery())
+
+    const userData = await queryClient.fetchQuery(
+      SessionQueries.currentSessionQuery(),
+    )
 
     const newSession = {
       ...session,

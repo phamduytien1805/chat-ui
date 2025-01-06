@@ -1,9 +1,7 @@
-import axios, { AxiosRequestConfig } from "axios";
+import { AxiosRequestConfig } from "axios";
 import { AuthService } from "../auth"
 import { sessionLib, useSession } from "@/shared/session";
 import { api } from "..";
-import { redirect } from "react-router-dom";
-import { pathKeys } from "@/shared/lib/react-router";
 
 interface RetryQueueItem {
     resolve: (value?: any) => void;

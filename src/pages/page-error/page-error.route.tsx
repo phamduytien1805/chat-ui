@@ -1,8 +1,7 @@
 import { compose, withSuspense } from '@/shared/lib/react'
 import { pathKeys } from '@/shared/lib/react-router'
 import { createElement, lazy } from 'react'
-import { RouteObject } from 'react-router-dom'
-import { PageErrorProps } from './page-error.ui'
+import { LoaderFunctionArgs, RouteObject } from 'react-router-dom'
 import { pageError } from './page-error.model'
 import { HttpStatusCode } from 'axios'
 
@@ -11,12 +10,18 @@ const PageError = lazy(() =>
     default: module.PageError,
   })),
 )
-const Page404 = () => PageError(pageError.getPageErrorProps(HttpStatusCode.NotFound))
+const errorPageLoader = (args: LoaderFunctionArgs) =>
+  import('./page-error.model').then((module) =>
+    module.PageErrorLoader.pageError(args),
+  )
 
-const Page401 = () => PageError(pageError.getPageErrorProps(HttpStatusCode.Unauthorized))
+const Page404 = () => <PageError {...pageError.getPageErrorProps(HttpStatusCode.NotFound)}/>
+
+const Page401 = () => <PageError {...pageError.getPageErrorProps(HttpStatusCode.Unauthorized)}/>
 
 export const pageErrorRoute: RouteObject = {
   path: pathKeys.error.root(),
+  loader: errorPageLoader,
   children: [
     {
       path: pathKeys.error.page404(),
