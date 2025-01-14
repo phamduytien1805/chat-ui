@@ -1,10 +1,12 @@
 import { AuthService, authTypesDto } from '@/shared/api/auth'
+import { AxiosValidationError } from '@/shared/axios'
 import { sessionLib, useSession } from '@/shared/session'
 import {
   DefaultError,
   UseMutationOptions,
   useMutation,
 } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
 
 export function useRegisterMutation(
   options?: Pick<
@@ -40,6 +42,14 @@ export function useRegisterMutation(
       setSession(session)
 
       await onSuccess?.(response, variables, context)
+    },
+
+    throwOnError :(error)  => {
+      console.log('error :>> ', error);
+      if (error.code === AxiosValidationError.ERR_BAD_VALIDATION) {
+        return true
+      }
+      return false
     },
 
     onError,
