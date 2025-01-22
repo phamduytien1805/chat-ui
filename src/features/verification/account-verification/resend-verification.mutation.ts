@@ -6,14 +6,13 @@ import {
   UseMutationOptions,
   useMutation,
 } from '@tanstack/react-query'
-import { AxiosError } from 'axios'
 
-export function useRegisterMutation(
+export function useResendVerification(
   options?: Pick<
     UseMutationOptions<
-      Awaited<ReturnType<typeof AuthService.createUserMutation>>,
+      Awaited<ReturnType<typeof AuthService.resendVerificationEmailMutation>>,
       DefaultError,
-      authTypesDto.CreateUserDto,
+      void,
       unknown
     >,
     'mutationKey' | 'onMutate' | 'onSuccess' | 'onError' | 'onSettled'
@@ -28,22 +27,16 @@ export function useRegisterMutation(
   } = options || {}
 
   return useMutation({
-    mutationKey: ['session', 'register-user', ...mutationKey],
+    mutationKey: ['resend-email', ...mutationKey],
 
-    mutationFn: async (createUserDto: authTypesDto.CreateUserDto) =>
-      AuthService.createUserMutation({ createUserDto }),
+    mutationFn: async () => AuthService.resendVerificationEmailMutation(),
 
     onMutate,
 
     onSuccess: async (response, variables, context) => {
-      const user = response.data
-      const { setSession } = useSession()
-      const session = sessionLib.transformUserAuthenticatedDtoToSession(user)
-      setSession(session)
-
       await onSuccess?.(response, variables, context)
     },
-
+    
     onError,
 
     onSettled,

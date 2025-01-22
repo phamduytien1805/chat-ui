@@ -20,6 +20,7 @@ export function QueryClientProvider(props: QueryClientProviderProps) {
       <ReactQueryDevtools
         initialIsOpen={false}
         buttonPosition="bottom-left"
+        
         errorTypes={[
           {
             name: 'Error',

@@ -1,4 +1,4 @@
-import { Button } from '@/shared/ui/button'
+import ResendButton from '@/features/verification/account-verification/resend-verification-btn.ui'
 
 export function VerificationPage() {
   return (
@@ -16,7 +16,7 @@ export function VerificationPage() {
           click the button below to resend the verification email.
         </p>
         <div className="flex justify-center">
-          <Button>Resend Verification Email</Button>
+          <ResendButton />
         </div>
       </div>
     </div>

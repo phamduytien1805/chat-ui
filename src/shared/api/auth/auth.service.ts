@@ -45,17 +45,21 @@ export class AuthService {
       data.loginUserDto,
     )
     return api
-      .post(`${this.prefixAuth}/login`, {  ...loginUserDto })
+      .post(`${this.prefixAuth}/login`, { ...loginUserDto })
       .then(AxiosContracts.responseContract(UserAuthenticatedDtoSchema))
   }
 
   static requestTokenMutation() {
     return api
-    .post(`${this.prefixAuth}/token`)
-    .then(AxiosContracts.responseContract(UserAuthenticatedDtoSchema))
+      .post(`${this.prefixAuth}/token`)
+      .then(AxiosContracts.responseContract(UserAuthenticatedDtoSchema))
   }
 
   static logoutUserMutation() {
     return Promise.resolve()
+  }
+
+  static resendVerificationEmailMutation() {
+    return api.post(`${this.prefixAuth}/resend-verification`).then(() => true)
   }
 }
