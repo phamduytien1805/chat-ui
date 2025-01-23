@@ -3,6 +3,7 @@ import { LoaderFunctionArgs, RouteObject } from 'react-router-dom'
 
 import { compose, withSuspense } from '@/shared/lib/react'
 import { pathKeys } from '@/shared/lib/react-router'
+import { VerificationPageSkeleton } from './verification-page.skeleton'
 
 const verificationPageLoader = (args: LoaderFunctionArgs) =>
   import('./verification-page.model').then((module) =>
@@ -16,7 +17,7 @@ const VerificationPage = lazy(() =>
 )
 
 const enhance = compose((component) =>
-  withSuspense(component, { FallbackComponent: () => <></> }),
+  withSuspense(component, { FallbackComponent: VerificationPageSkeleton }),
 )
 
 export const verificationPageRoute: RouteObject = {

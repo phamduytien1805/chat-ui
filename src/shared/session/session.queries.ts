@@ -19,4 +19,17 @@ export class SessionQueries {
           ?.dataUpdatedAt,
     })
   }
+
+  static verifyEmailQuery(token: string) {
+    return queryOptions({
+      queryKey: ['session', 'verify-user-email'],
+      queryFn: async ({signal}) => AuthService.verifyEmailQuery(token, {signal}),
+      initialData: () =>
+        queryClient.getQueryData<boolean>(['session', 'verify-user-email']),
+      initialDataUpdatedAt: () =>
+        queryClient.getQueryState(['session', 'verify-user-email'])
+          ?.dataUpdatedAt,
+    })
+  }
+  
 }

@@ -1,2 +1,1 @@
-import { useResendVerification } from './resend-verification.mutation'
-export { useResendVerification }
+export { useResendVerification } from './resend-verification.mutation'

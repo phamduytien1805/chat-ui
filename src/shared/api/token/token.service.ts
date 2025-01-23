@@ -16,7 +16,10 @@ class TokenService  {
             this.isRefreshing = true
             try {
                 const {data} = await AuthService.requestTokenMutation()
-                useSession().setSession(sessionLib.transformUserAuthenticatedDtoToSession(data))
+                console.log('sessionLib.transformUserAuthenticatedDtoToSession(data) :>> ', sessionLib.transformUserAuthenticatedDtoToSession(data),useSession);
+                const { setSession ,getSession} = useSession();
+                setSession(sessionLib.transformUserAuthenticatedDtoToSession(data))
+                console.log('get :>> ', getSession());
                 return api.request(config)
             } catch (error) {
                 return Promise.reject(error)

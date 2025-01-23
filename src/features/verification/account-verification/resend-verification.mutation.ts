@@ -1,6 +1,4 @@
-import { AuthService, authTypesDto } from '@/shared/api/auth'
-import { AxiosValidationError } from '@/shared/axios'
-import { sessionLib, useSession } from '@/shared/session'
+import { AuthService } from '@/shared/api/auth'
 import {
   DefaultError,
   UseMutationOptions,

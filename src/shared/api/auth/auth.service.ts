@@ -62,4 +62,10 @@ export class AuthService {
   static resendVerificationEmailMutation() {
     return api.post(`${this.prefixAuth}/resend-verification`).then(() => true)
   }
+
+  static verifyEmailQuery(token: string,config: { signal?: AbortSignal }) {
+    return api
+      .post(`${this.prefixAuth}/verify-email`, { token },config)
+      .then(() => true)
+  }
 }

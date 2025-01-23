@@ -28,9 +28,7 @@ export const useSession = () => {
 
 export class SessionLoader {
   static async sessionLoader(args: LoaderFunctionArgs) {
-    const { setSession, getSession } = useSession()
-    const session = getSession()
-    if (!session) {
+    if (!useSession().getSession()) {
       return redirect(pathKeys.login())
     }
 
@@ -38,11 +36,10 @@ export class SessionLoader {
       SessionQueries.currentSessionQuery(),
     )
 
-    const newSession = {
-      ...session,
-      ...userData,
-    }
-    setSession(newSession)
+    useSession().setSession((prev) => ({
+     ...userData, 
+     accessToken: prev?.accessToken || ''
+    }))
     return args
   }
 }

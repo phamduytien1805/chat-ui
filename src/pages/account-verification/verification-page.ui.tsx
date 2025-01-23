@@ -1,9 +1,19 @@
 import ResendButton from '@/features/verification/account-verification/resend-verification-btn.ui'
+import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom'
+import { VerificationPageSkeleton } from './verification-page.skeleton';
 
 export function VerificationPage() {
+  const [searchParams,setSearchParams] = useSearchParams();
+  useEffect(() => {
+    if(searchParams.get('token')) {
+      searchParams.delete('token')
+      setSearchParams(searchParams)
+    }
+  }, [searchParams])
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-muted p-8">
-      <div className="max-w-xxl p-8 bg-neutral-900 shadow-lg rounded-lg ">
+    <div className="flex flex-col items-center justify-center min-h-screen dark:bg-muted p-8">
+      <div className="max-w-xxl p-8 dark:bg-neutral-900 shadow-lg rounded-lg ">
         <h2 className="text-2xl font-bold text-center mb-4 dark:text-gray-200">
           Verify Your Email Address
         </h2>
