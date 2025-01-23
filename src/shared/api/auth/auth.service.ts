@@ -56,7 +56,7 @@ export class AuthService {
   }
 
   static logoutUserMutation() {
-    return Promise.resolve()
+    return api.post(`${this.prefixAuth}/logout`).then(() => true)
   }
 
   static resendVerificationEmailMutation() {

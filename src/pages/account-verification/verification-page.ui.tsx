@@ -1,12 +1,13 @@
 import ResendButton from '@/features/verification/account-verification/resend-verification-btn.ui'
-import { useEffect } from 'react';
-import { useSearchParams } from 'react-router-dom'
-import { VerificationPageSkeleton } from './verification-page.skeleton';
+import { useEffect } from 'react'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { VerificationPageSkeleton } from './verification-page.skeleton'
+import { LogoutButton } from '@/features/session/logout'
 
 export function VerificationPage() {
-  const [searchParams,setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams()
   useEffect(() => {
-    if(searchParams.get('token')) {
+    if (searchParams.get('token')) {
       searchParams.delete('token')
       setSearchParams(searchParams)
     }
@@ -25,8 +26,9 @@ export function VerificationPage() {
           If you didn't receive the email, please check your spam folder or
           click the button below to resend the verification email.
         </p>
-        <div className="flex justify-center">
+        <div className="flex justify-center gap-4">
           <ResendButton />
+          <LogoutButton />
         </div>
       </div>
     </div>
